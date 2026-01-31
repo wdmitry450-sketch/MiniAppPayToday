@@ -1,144 +1,84 @@
 <!DOCTYPE html>
-<html lang="ru"> 
+<html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PayToday Mini App</title>
+<title>PayToday Mini</title>
 <style>
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', system-ui, sans-serif;
-  background: linear-gradient(135deg, #0a0e1a 0%, #0f1b3a 100%);
-  color: #e0f0ff;
-  min-height: 100vh;
-  overflow-x: hidden;
+body { 
+  margin: 0; padding: 0; background: #0a0e1a; color: #e0f0ff; 
+  font-family: 'Segoe UI', sans-serif; min-height: 100vh; 
 }
-header {
-  background: rgba(15, 76, 117, 0.7);
-  backdrop-filter: blur(10px);
-  padding: 16px;
-  text-align: center;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+header { 
+  background: #000; padding: 12px; text-align: left; 
+  position: sticky; top: 0; z-index: 100; 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5); 
 }
-h1 {
-  margin: 0;
-  font-size: 1.6rem;
-  background: linear-gradient(90deg, #00d4ff, #a0e7ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.logo { height: 35px; width: auto; } 
+.strip { 
+  display: flex; justify-content: space-between; 
+  padding: 15px 20px; background: #111; 
+  border-bottom: 1px solid #222; overflow-x: auto; gap: 10px; 
 }
-nav {
-  display: flex;
-  justify-content: center;
-  margin: 16px 0;
+.story { 
+  min-width: 150px; background: linear-gradient(90deg, #006633, #003300); 
+  padding: 10px; border-radius: 12px; text-align: center; 
+  color: white; font-size: 0.9rem; box-shadow: 0 2px 10px rgba(0,102,51,0.4); 
 }
-.tab {
-  padding: 10px 24px;
-  margin: 0 8px;
-  border-radius: 30px;
-  background: rgba(255,255,255,0.05);
-  color: #a0e7ff;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s;
-  border: 1px solid transparent;
+.nav { 
+  position: fixed; bottom: 0; left: 0; width: 100%; 
+  background: #000; display: flex; justify-content: space-around; 
+  align-items: center; padding: 12px 0; z-index: 50; 
+  border-top: 1px solid #222; 
 }
-.tab.active, .tab:hover {
-  background: linear-gradient(45deg, #00d4ff, #0077cc);
-  color: white;
-  box-shadow: 0 0 15px rgba(0,212,255,0.5);
+.nav a { 
+  color: #aaa; font-size: 0.8rem; text-decoration: none; 
+  text-align: center; width: 33%; 
 }
-.news-grid, .forms-section {
-  padding: 20px;
-  display: grid;
-  gap: 18px;
+.nav a.center { color: #2ecc71; font-weight: bold; font-size: 1rem; }
+.modal { 
+  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+  background: rgba(0,0,0,0.85); z-index: 200; justify-content: center; 
+  align-items: center; 
 }
-.card {
-  background: rgba(37,37,37,0.4);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.6);
-  border: 1px solid rgba(0,212,255,0.15);
-  transition: transform 0.3s, box-shadow 0.3s;
-  backdrop-filter: blur(8px);
+.modal-content { 
+  background: #fff; color: #222; border-radius: 16px; width: 90%; max-width: 400px; 
+  padding: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.7); 
+  position: relative; 
 }
-.card:hover { transform: translateY(-6px); box-shadow: 0 12px 35px rgba(0,212,255,0.3); }
-.card img { width: 100%; height: 140px; object-fit: cover; }
-.card-content { padding: 16px; }
-h3 { color: #00d4ff; margin: 0 0 8px; font-size: 1.1rem; }
-.summary { font-size: 0.9rem; color: #b0d8ff; line-height: 1.4; margin-bottom: 12px; }
-.btn {
-  background: linear-gradient(90deg, #00d4ff, #00a8cc);
-  color: #000;
-  padding: 10px;
-  border: none;
-  border-radius: 30px;
-  font-weight: bold;
-  text-align: center;
-  display: block;
-  text-decoration: none;
-  box-shadow: 0 4px 15px rgba(0,212,255,0.4);
-}
-.btn:hover { background: linear-gradient(90deg, #00a8cc, #0077cc); }
-.forms-section { display: none; } /* скрыта по умолчанию */
-.forms-section.active { display: block; }
-form { display: grid; gap: 14px; }
-input, select { padding: 12px; border-radius: 12px; border: 1px solid #3a5a7a; background: rgba(255,255,255,0.08); color: white; }
-footer { text-align: center; padding: 16px; color: #777; font-size: 0.8rem; }
+.close { position: absolute; top: 10px; right: 15px; font-size: 1.4rem; color: #888; cursor: pointer; }
+form { display: grid; gap: 12px; }
+input, button { padding: 12px; border-radius: 8px; border: 1px solid #ddd; }
+button { background: #2ecc71; color: white; font-weight: bold; cursor: pointer; }
 </style>
 </head>
 <body>
-<header><h1>PayToday</h1></header>
-
-<nav>
-<a href="#" class="tab active" onclick="showSection('news')">Новости</a>
-<a href="#" class="tab" onclick="showSection('forms')">Формы</a>
-</nav>
-
-<div id="news" class="news-grid">
-<!-- Карточки новостей, потом подключишь API -->
-<div class="card">
-<img src="https://via.placeholder.com/340x140/0a1f3a/00d4ff?text=Visa+Update" alt="Visa">
-<div class="card-content">
-<h3>Visa: новые лимиты 2026</h3>
-<p class="summary">Мгновенные переводы до 10к€ без верификации. Что это меняет для бизнеса?</p>
-<a href="#" class="btn">Читать</a>
+<header><img src="https://leandingpaytoday.pages.dev/paytoday-logo.png" class="logo" alt="PayToday"></header>
+<div class="strip">
+  <div class="story"><b>💰</b> PayPal снижает комиссии</div>
+  <div class="story"><b>📈</b> Доллар вырос на 0.8%</div>
 </div>
+<div class="nav">
+  <a href="#">📰 Новости</a>
+  <a href="#" class="center" onclick="openForm()">🧾 Заявка</a>
+  <a href="#">💱 Курсы</a>
 </div>
-<!-- Добавь ещё 2-3 карточки аналогично -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeForm()">&times;</span>
+    <h3>Подать заявку</h3>
+    <form>
+      <input type="text" placeholder="Название бизнеса">
+      <input type="tel" placeholder="Телефон">
+      <input type="email" placeholder="Email">
+      <button type="submit">Отправить</button>
+    </form>
+  </div>
 </div>
-
-<div id="forms" class="forms-section">
-<div class="card">
-<div class="card-content">
-<h3>Платёжная форма</h3>
-<form>
-<input type="text" placeholder="Сумма">
-<select>
-<option>Visa / Master</option>
-<option>PayPal</option>
-<option>Crypto (USDT)</option>
-</select>
-<input type="text" placeholder="Получатель">
-<button class="btn" type="submit">Отправить</button>
-</form>
-</div>
-</div>
-</div>
-
-<footer>© PayToday 2026 • Secure & Fast</footer>
 
 <script>
-function showSection(section) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  event.target.classList.add('active');
-  document.getElementById('news').style.display = section === 'news' ? 'grid' : 'none';
-  document.getElementById('forms').style.display = section === 'forms' ? 'block' : 'none';
-}
+function openForm() { document.getElementById("modal").style.display = "flex"; }
+function closeForm() { document.getElementById("modal").style.display = "none"; }
 </script>
 </body>
 </html>
