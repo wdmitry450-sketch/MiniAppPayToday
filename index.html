@@ -1,1 +1,57 @@
-/
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Мини-Апп</title>
+<style>
+body { background: #1a1a1a; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
+header { background: #0f4c75; padding: 20px; text-align: center; }
+nav { display: flex; justify-content: center; margin: 20px 0; border-bottom: 1px solid #3a3a3a; }
+nav a { color: #a0e7ff; text-decoration: none; padding: 12px 25px; margin: 0 10px; font-weight: 600; }
+nav a.active { background: #00d4ff; border-radius: 8px 8px 0 0; color: #0c2a45; }
+.news-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 25px; }
+.card { background: #252525; width: 340px; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 15px rgba(0,0,0,0.5); }
+.card img { width: 100%; height: 170px; object-fit: cover; }
+.card-content { padding: 16px; }
+.card-content h3 { color: #00d4ff; font-size: 18px; margin: 0 0 10px; }
+.summary { font-size: 14px; line-height: 1.6; margin-bottom: 12px; color: #ddd; }
+.btn { background: #00d4ff; color: #000; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; text-decoration: none; display: block; text-align: center; margin-top: 5px; }
+.btn:hover { background: #00a8cc; }
+footer { text-align: center; padding: 20px; color: #777; font-size: 12px; border-top: 1px solid #333; }
+</style>
+</head>
+<body>
+<header><h1>Платёжка</h1></header>
+<nav>
+<a href="#" class="active">Новости</a>
+<a href="#">Формы</a>
+</nav>
+<div class="news-grid">
+<div class="card">
+<img src="https://via.placeholder.com/340x170/0a4d7e/ffffff?text=Visa+обновила" alt="Visa">
+<div class="card-content">
+<h3>Visa запускает мгновенные лимиты</h3>
+<p class="summary">Новые правила позволяют переводить до 5к евро в день без доп. проверки.</p>
+<a href="#" class="btn">Читать</a>
+</div>
+</div>
+<div class="card">
+<img src="https://via.placeholder.com/340x170/5e1e8a/ffffff?text=Forex+тренд" alt="Forex">
+<div class="card-content">
+<h3>Forex: доллар растёт</h3>
+<p class="summary">Индекс доллара поднялся на 2% за ночь из-за роста ставок ФРС.</p>
+<a href="#" class="btn">Читать</a>
+</div>
+</div>
+<div class="card">
+<img src="https://via.placeholder.com/340x170/2a3f6f/ffffff?text=iGaming" alt="iGaming">
+<div class="card-content">
+<h3>iGaming: новая лицензия в ЕС</h3>
+<p class="summary">Мальта выдала доступ трем платформам — ждём роста ставок.</p>
+<a href="#" class="btn">Читать</a>
+</div>
+</div>
+</div>
+<footer>© 2026 Твоя система</footer>
+</body>
+</html>
